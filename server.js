@@ -32,8 +32,8 @@ function introPrompt() {
         type: "list",
         message: "What would you like to do?",
         choices: [
-            "View All Departments",
             "View All Employees",
+            "View All Departments",
             "View All Roles",
             "Add New Department",
             "Add New Employee",
@@ -43,12 +43,12 @@ function introPrompt() {
         ]
     }).then(function (userInput) {
         switch (userInput.intro) {
-            case "View All Departments":
-                viewAllDepartments();
-                break;
-
              case "View All Employees":
                 viewAllEmployees();
+                break;
+            
+            case "View All Departments":
+                viewAllDepartments();
                 break;
 
             case "View All Roles":
@@ -56,7 +56,7 @@ function introPrompt() {
                 break;
 
             case "Update Employee Role":
-                updateRole();
+                roleUpdate();
                 break;
 
             case "Add New Department":
@@ -82,9 +82,25 @@ const viewAllEmployees = () => {
     var query = "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department on role.department_id = department.id";
     connection.query(query, (err, res) => {
         if (err) throw err;
-        console.table(res)
+        console.table(chalk.yellow("Employees"),res)
         introPrompt();
     });
 }
 
+const viewAllDepartments = () => {
+    var query = "SELECT * FROM department"
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(chalk.yellow("Departments"),res)
+        introPrompt();
+    });
+}
 
+const viewAllRoles = () => {
+    var query = "SELECT * FROM role"
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(chalk.yellow("Roles"),res)
+        introPrompt();
+    });
+}
