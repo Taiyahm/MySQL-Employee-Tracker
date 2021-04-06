@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+const chalk = require('chalk');
+const figlet = require("figlet");
 const consoleTable = require("console.table")
 
 var connection = mysql.createConnection({
@@ -10,9 +12,17 @@ var connection = mysql.createConnection({
     database:'employeeDB'
 });
 
+const init = () => {
+    console.log(
+      chalk.cyan.bold(figlet.textSync("Employee Tracker"))
+    );
+};
+
+init();
+
 connection.connect(function (err) {
     if (err) throw err;
-    console.log("Connected as Id" + connection.threadId)
+    console.log(chalk.green("Connected as Id: " + connection.threadId)),
     introPrompt();
 });
 
@@ -22,35 +32,22 @@ function introPrompt() {
         type: "list",
         message: "What would you like to do?",
         choices: [
-            "Add new department",
-            "Add new employee",
-            "Add new role",
-            "View all departments",
-            "View all employees",
-            "View all roles",
-            "Update employee role",
+            "View All Departments",
+            "View All Employees",
+            "View All Roles",
+            "Add New Department",
+            "Add New Employee",
+            "Add New Role",
+            "Update Employee Role",
             "EXIT"
         ]
     }).then(function (userInput) {
         switch (userInput.intro) {
-            case "Add New Department":
-                addNewDepartment();
-                break;
-
-            case "Add New Employee":
-                addNewEmployee();
-                break;
-
-            case "Add New Role":
-                addNewRole();
-                break;
-    
-
             case "View All Departments":
                 viewAllDepartments();
                 break;
 
-            case "View All Employees":
+             case "View All Employees":
                 viewAllEmployees();
                 break;
 
@@ -62,9 +59,32 @@ function introPrompt() {
                 updateRole();
                 break;
 
+            case "Add New Department":
+                addNewDepartment();
+                break;
+
+            case "Add New Employee":
+                addNewEmployee();
+                break;
+
+            case "Add New Role":
+                addNewRole();
+                break;
+
             case "EXIT":
                 connection.end();
                 break;
         }
     });
 }
+
+const viewAllEmployees = () => {
+    var query = "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department on role.department_id = department.id";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res)
+        introPrompt();
+    });
+}
+
+
