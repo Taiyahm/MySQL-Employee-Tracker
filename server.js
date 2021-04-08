@@ -82,7 +82,7 @@ const viewAllEmployees = () => {
     var query = "SELECT employees.id, employees.first_name, employees.last_name, role.title, department.name AS department, role.salary FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department on role.department_id = department.id";
     connection.query(query, (err, res) => {
         if (err) throw err;
-        console.table(chalk.yellow("Employees"),res)
+        console.table(res)
         introPrompt();
     });
 }
@@ -91,7 +91,7 @@ const viewAllDepartments = () => {
     var query = "SELECT * FROM department"
     connection.query(query, (err, res) => {
         if (err) throw err;
-        console.table(chalk.yellow("Departments"),res)
+        console.table(res)
         introPrompt();
     });
 }
@@ -100,7 +100,7 @@ const viewAllRoles = () => {
     var query = "SELECT * FROM role"
     connection.query(query, (err, res) => {
         if (err) throw err;
-        console.table(chalk.yellow("Roles"),res)
+        console.table(res)
         introPrompt();
     });
 }
