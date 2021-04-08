@@ -38,7 +38,6 @@ function introPrompt() {
             "Add New Department",
             "Add New Employee",
             "Add New Role",
-            "Update Employee Role",
             "EXIT"
         ]
     }).then(function (userInput) {
@@ -65,10 +64,6 @@ function introPrompt() {
 
             case "Add New Role":
                 addNewRole();
-                break;
-
-            case "Update Employee Role":
-                roleUpdate();
                 break;
 
             case "EXIT":
