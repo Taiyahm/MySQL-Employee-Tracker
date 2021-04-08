@@ -26,6 +26,9 @@
   ```
   node server or server.js
   ```
+  ## Demo
+  Click the link below to view the demo of this application:\
+    https://drive.google.com/file/d/16Svzv8GaTcoI05KYLXwHYd_2ERMYeFqp/view
   ## Technologies
   * MySQL
   * Inquirer
