@@ -8,14 +8,28 @@
   ## Table of Contents
 
   * [Installation](#Installation)
-  * [Usage](#Usage)
+  * [Demo](#Demo)
+  * [Technologies](#Technologies)
   * [License](#License)
-  * [Contributors](#Contributors)
-  * [Test](#Test)
   * [Questions](#question) 
 
   ## Installation 
+  First clone this repository
+  Enter the following commands below to install all needed dependencies:
+  ```
   npm i
+  npm inquire
+  npm mysql
+  ```
+  Copy and paste contents of schema and seed sql into MySQL workbench.
+  Then run the followiing command to run app:
+  ```
+  node server or server.js
+  ```
+  ## Technologies
+  * MySQL
+  * Inquirer
+  * Node
 
   ## License 
 
