@@ -1,31 +1,27 @@
-DROP DATABASE IF EXISTS employeeDB;
+ROP DATABASE IF EXISTS employeeDB;
+
 CREATE DATABASE employeeDB;
 
 USE employeeDB;
 
+-- DEPARTMENT TABLE ----
 CREATE TABLE department (
-    id INT AUTO_INCREMENT NOT NULL ,
-    department_name VARCHAR(30) NOT NULL,
-    PRIMARY KEY(id),
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(30)
 );
-
+-- ROLE TABLE ---
 CREATE TABLE role (
-    id INT AUTO_INCREMENT NOT NULL,
-    title VARCHAR(30) NULL,
-    salary DECIMAL(10, 2) NULL,
-    department_id INT NULL,
-    PRIMARY KEY(id),
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(30),
+  salary DECIMAL,
+  department_id INT,
+  FOREIGN KEY (department_id) REFERENCES department(id)
 );
-
+-- EMPLOYEE ROLE TABLE ----
 CREATE TABLE employees (
-    id INT AUTO_INCREMENT NOT NULL,
-    first_name VARCHAR(30) NULL,
-    last_name VARCHAR(30) NULL,
-    role_id INT NOT NULL,
-    manager_id INT NULL,
-    PRIMARY KEY(id),
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(30),
+  last_name VARCHAR(30),
+  manager_id INT,
+  role_id INT
 );
-
-SELECT * FROM department;
-SELECT * FROM role;
-SELECT * FROM employees;
